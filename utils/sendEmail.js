@@ -140,13 +140,13 @@ const resolveAsset = (...candidates) => {
 };
 
 const LOGO_EN_PATH = resolveAsset(
-    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.png'),
-    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.png')
+    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.webp'),
+    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.webp')
 );
 const LOGO_AR_PATH = resolveAsset(
-    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.png'),
-    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.png'),
-    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.png')
+    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.webp'),
+    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.webp'),
+    path.join(__dirname, '../../_remote_frontend/public/assets/best-signature-logo.webp')
 );
 // Editorial hero photo at the top of every design-system email card — per language.
 // Arabic → email-hero-ar.png, English → email-hero-en.png. Each falls back to the
@@ -292,7 +292,7 @@ const dsFooter = (ar) => {
           </td>
           <td align="${endAlign}" style="vertical-align:top;font-family:${sans};font-size:12px;line-height:1.9;color:#17181c;" dir="ltr">
             <a href="tel:+971509967967" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/724/724664.png" alt="Phone" width="13" height="13" style="vertical-align:middle;margin-right:6px;border:0;">+971 50 996 7967</a><br>
-            <a href="https://wa.me/971503114080" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="WhatsApp" width="12" height="12" style="vertical-align:middle;margin-right:6px;border:0;">+971 50 311 4080</a><br>
+            <a href="https://wa.me/971503114080" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="WhatsApp" width="12" height="12" style="vertical-align:middle;margin-right:6px;border:0;">+971 56 422 5903</a><br>
             <a href="mailto:support@bestsignatureautoparts.com" style="color:#1488c0;text-decoration:none;font-weight:600;">support@bestsignatureautoparts.com</a><br>
             <a href="${SITE}" style="color:#1488c0;text-decoration:none;font-weight:600;">www.bestsignatureautoparts.com</a>
           </td>
