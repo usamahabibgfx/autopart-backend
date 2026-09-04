@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets — NEVER commit
+.env
+.env.*
+!.env.example
+.env_utf8
+
+# Database dumps (sensitive data)
+*.sql
+temp/
+
+# Logs
+*.log
+logs/
+
+# Runtime uploads (large, ephemeral storage)
+uploads/
+
+# Scratch / temp
+scratch/
+temp-scripts/
+
+# OS / editor
+.DS_Store
+*.pem
+
+# Agent folders
+.claude/
+.agent/
+.agents/

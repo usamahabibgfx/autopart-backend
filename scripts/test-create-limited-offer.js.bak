@@ -1,0 +1,50 @@
+require('dotenv').config();
+const Product = require('../models/product.model');
+const db = require('../config/db');
+
+async function testCreateLimitedOffer() {
+    try {
+        console.log('--- TESTING CREATE LIMITED OFFER PRODUCT ---');
+
+        const newProduct = {
+            name: 'Backend Test Limited Offer',
+            description: 'Testing backend creation logic',
+            price: 199.99,
+            stock_quantity: 50,
+            category_id: 1,
+            brand_id: 1,
+            is_active: true,
+            is_limited_offer: true, // This is the key flag we are testing
+            is_weekly_deal: false,
+            is_featured: false
+        };
+
+        console.log('Creating product with data:', JSON.stringify(newProduct, null, 2));
+
+        const productId = await Product.create(newProduct);
+        console.log(`Product created with ID: ${productId}`);
+
+        console.log('--- VERIFYING IN DATABASE ---');
+        const [rows] = await db.query('SELECT * FROM products WHERE id = ?', [productId]);
+        const createdProduct = rows[0];
+
+        console.log('Fetched Product:', JSON.stringify(createdProduct, null, 2));
+
+        if (createdProduct.is_limited_offer === 1) {
+            console.log('SUCCESS: Product is correctly marked as Limited Offer (is_limited_offer = 1)');
+        } else {
+            console.error('FAILURE: Product is NOT marked as Limited Offer (is_limited_offer = ' + createdProduct.is_limited_offer + ')');
+        }
+
+        console.log('--- CLEANING UP ---');
+        await Product.delete(productId);
+        console.log('Test product deleted.');
+
+        process.exit(0);
+    } catch (e) {
+        console.error('ERROR:', e);
+        process.exit(1);
+    }
+}
+
+testCreateLimitedOffer();

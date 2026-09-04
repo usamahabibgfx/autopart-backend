@@ -1,0 +1,35 @@
+require('dotenv').config();
+const Product = require('../models/product.model');
+
+async function testWhatFrontendGets() {
+    try {
+        console.log('--- TEST: Frontend Fetch Simulation ---');
+
+        // Use Product.findAll exactly how controller does
+        const result = await Product.findAll({
+            search: 'test',
+            limit: 1,
+            offset: 0
+        });
+
+        const products = result.products;
+        if (products.length === 0) {
+            console.log('Product "test" not found.');
+            process.exit(0);
+        }
+
+        const p = products[0];
+        console.log('Raw Product Data (as returned to frontend):');
+        console.log(JSON.stringify(p, null, 2));
+
+        console.log(`WD Type: ${typeof p.is_weekly_deal}, LO Type: ${typeof p.is_limited_offer}, F Type: ${typeof p.is_featured}`);
+        console.log(`WD Value: ${p.is_weekly_deal}, LO Value: ${p.is_limited_offer}, F Value: ${p.is_featured}`);
+
+        process.exit(0);
+    } catch (e) {
+        console.error('ERROR:', e);
+        process.exit(1);
+    }
+}
+
+testWhatFrontendGets();

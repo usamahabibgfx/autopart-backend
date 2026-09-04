@@ -1,0 +1,66 @@
+require('dotenv').config();
+const Product = require('../models/product.model');
+const db = require('../config/db');
+
+async function testWeeklyToLimited() {
+    try {
+        console.log('--- TEST: WEEKLY -> LIMITED (Product: "test") ---');
+
+        // 1. Find product "test"
+        const [rows] = await db.query("SELECT * FROM products WHERE name = 'test'");
+        if (rows.length === 0) {
+            console.error('Product "test" not found!');
+            process.exit(0);
+        }
+        const product = rows[0];
+        console.log(`Found "test" (ID: ${product.id}). Current State: WD=${product.is_weekly_deal}, LO=${product.is_limited_offer}`);
+
+        // 2. FORCE VALID STARTING STATE: Make it Weekly Deal first
+        console.log('--- SETUP: Setting to Weekly Deal = 1, Limited = 0 ---');
+        await Product.update(product.id, {
+            is_weekly_deal: true,
+            is_limited_offer: false
+        });
+
+        // precise delay to ensure log separation
+        await new Promise(r => setTimeout(r, 500));
+
+        // Verify setup
+        const [setupRows] = await db.query("SELECT is_weekly_deal, is_limited_offer FROM products WHERE id = ?", [product.id]);
+        console.log(`Setup State: WD=${setupRows[0].is_weekly_deal}, LO=${setupRows[0].is_limited_offer}`);
+
+        if (setupRows[0].is_weekly_deal !== 1) {
+            console.error('Setup failed, could not set to Weekly Deal.');
+            process.exit(1);
+        }
+
+        // 3. EXECUTE THE TEST UPDATE
+        console.log('--- ACTION: Updating to Limited Offer = 1, Weekly Deal = 0 ---');
+        // This simulates exactly what the frontend sends: true for limited, false for weekly
+        const updateData = {
+            is_weekly_deal: false,
+            is_limited_offer: true
+        };
+
+        await Product.update(product.id, updateData);
+
+        // 4. VERIFY RESULT
+        const [finalRows] = await db.query("SELECT is_weekly_deal, is_limited_offer FROM products WHERE id = ?", [product.id]);
+        const final = finalRows[0];
+        console.log(`Final State: WD=${final.is_weekly_deal}, LO=${final.is_limited_offer}`);
+
+        if (final.is_weekly_deal === 0 && final.is_limited_offer === 1) {
+            console.log('SUCCESS: Switched from Weekly to Limited correctly.');
+        } else {
+            console.error('FAILURE: Logic did not switch correctly.');
+        }
+
+        process.exit(0);
+
+    } catch (e) {
+        console.error('ERROR:', e);
+        process.exit(1);
+    }
+}
+
+testWeeklyToLimited();
