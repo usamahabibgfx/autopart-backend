@@ -292,8 +292,8 @@ const dsFooter = (ar) => {
           </td>
           <td align="${endAlign}" style="vertical-align:top;font-family:${sans};font-size:12px;line-height:1.9;color:#17181c;" dir="ltr">
             <a href="tel:+971509967967" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/724/724664.png" alt="Phone" width="13" height="13" style="vertical-align:middle;margin-right:6px;border:0;">+971 50 996 7967</a><br>
-            <a href="https://wa.me/971503114080" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="WhatsApp" width="12" height="12" style="vertical-align:middle;margin-right:6px;border:0;">+971 56 422 5903</a><br>
-            <a href="mailto:support@bestsignatureautoparts.com" style="color:#1488c0;text-decoration:none;font-weight:600;">support@bestsignatureautoparts.com</a><br>
+            <a href="https://wa.me/971564225903" style="color:#17181c;text-decoration:none;"><img src="https://cdn-icons-png.flaticon.com/32/733/733585.png" alt="WhatsApp" width="12" height="12" style="vertical-align:middle;margin-right:6px;border:0;">+971 56 422 5903</a><br>
+            <a href="mailto:info@bestsignatureautoparts.com" style="color:#1488c0;text-decoration:none;font-weight:600;">info@bestsignatureautoparts.com</a><br>
             <a href="${SITE}" style="color:#1488c0;text-decoration:none;font-weight:600;">www.bestsignatureautoparts.com</a>
           </td>
         </tr></table>
@@ -702,7 +702,7 @@ const sendWelcomeEmail = async (toEmail, userName, locale = 'en') => {
 ${dsButton(SITE, L.cta, ar)}
 <div style="height:34px;"></div>
 <div style="border-top:1px solid #ecedef;padding-top:22px;">
-  <p style="margin:0;font-family:${SANS};font-size:14px;line-height:1.65;color:#17181c;">${L.help} <a href="mailto:support@bestsignatureautoparts.com" style="color:#1488c0;text-decoration:none;font-weight:600;">support@bestsignatureautoparts.com</a>.</p>
+  <p style="margin:0;font-family:${SANS};font-size:14px;line-height:1.65;color:#17181c;">${L.help} <a href="mailto:info@bestsignatureautoparts.com" style="color:#1488c0;text-decoration:none;font-weight:600;">info@bestsignatureautoparts.com</a>.</p>
 </div>`;
 
     const mailOptions = {
